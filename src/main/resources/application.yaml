@@ -1,0 +1,13 @@
+server:
+  port: 14000
+spring:
+  data:
+    cassandra.keyspace-name: chat
+    cassandra.port: 9042
+    cassandra.contact-points: 127.0.0.1
+  cassandra:
+    local-datacenter: datacenter1
+nats:
+  address: nats://${NATS_HOST:localhost}:4222
+  username: ${NATS_USERNAME:guest}
+  password: ${NATS_PASSWORD:guest}

@@ -1,0 +1,22 @@
+package com.thehedgelog.spring.demo.nats;
+
+import com.thehedgelog.spring.demo.ChatMessage;
+import com.thehedgelog.spring.demo.nats.serde.ChatMessageNatsMesssageSerDes;
+import com.thehedgelog.spring.demo.nats.server.Accept;
+import com.thehedgelog.spring.demo.nats.server.NatsListener;
+import com.thehedgelog.spring.demo.nats.server.Publish;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Scope
+@Component
+@Slf4j
+public class ChatMessageListener implements NatsListener {
+
+    @Accept(subject = "chat", stream = "message", durable = "c_m", serde = ChatMessageNatsMesssageSerDes.class)
+    public void onMessageReceived(ChatMessage message) {
+        log.info("Received message {}", message);
+    }
+
+}
