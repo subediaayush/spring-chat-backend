@@ -1,6 +1,7 @@
 package com.thehedgelog.spring.demo;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -23,8 +24,8 @@ public class Controller {
     }
 
     @GetMapping("/message/get")
-    public List<ChatMessage> getMessages() {
-        return Collections.emptyList();
+    public List<ChatMessage> getMessages(@Param("u1") String u1, @Param("u2") String u2) {
+        return chatService.listMessages(u1, u2);
     }
 
 //    @PostMapping("/message/send")

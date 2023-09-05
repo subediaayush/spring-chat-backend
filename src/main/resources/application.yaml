@@ -2,12 +2,24 @@ server:
   port: 14000
 spring:
   data:
-    cassandra.keyspace-name: chat
-    cassandra.port: 9042
-    cassandra.contact-points: 127.0.0.1
+    cassandra:
+      keyspace-name: chat
+      port: 9042
+      contact-points: 127.0.0.1
+      request:
+        timeout: 10s
+      connection:
+        connect-timeout: 10s
+        init-query-timeout: 10s
   cassandra:
+    keyspace-name: chat
     local-datacenter: datacenter1
+    schema-action: CREATE_IF_NOT_EXISTS
 nats:
   address: nats://${NATS_HOST:localhost}:4222
   username: ${NATS_USERNAME:guest}
   password: ${NATS_PASSWORD:guest}
+
+
+
+

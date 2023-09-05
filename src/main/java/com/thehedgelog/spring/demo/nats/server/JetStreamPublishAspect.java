@@ -64,10 +64,8 @@ public class JetStreamPublishAspect implements MethodInterceptor {
             Object serde;
             try {
                 serde = context.getBean(annotation.serde().getSimpleName());
-                log.info("Obtained mapper bean");
             } catch (NoSuchBeanDefinitionException e) {
                 serde = annotation.serde().getDeclaredConstructor().newInstance();
-                log.info("Obtained mapper from constructor");
             }
 
             var message = Arrays.stream(invocation.getArguments()).findFirst().orElseThrow();

@@ -19,7 +19,7 @@ public class ChatMessageDto {
 
     public static ChatMessageDto fromMessage(ChatMessage message) {
         return ChatMessageDto.builder().from(message.getMessage())
-                .to(message.getTo())
+                .to(message.getReceiver())
                 .message(message.getMessage())
                 .bucket(message.getBucket())
                 .timestamp(message.getTimestamp().toEpochMilli())
@@ -27,11 +27,11 @@ public class ChatMessageDto {
     }
 
     public ChatMessage toMessage() {
-        return ChatMessage.builder().from(this.getMessage())
-                .to(this.getTo())
+        return ChatMessage.builder().sender(this.getFrom())
+                .receiver(this.getTo())
                 .message(this.getMessage())
-                .bucket(this.getBucket())
-                .timestamp(Instant.ofEpochMilli(this.getTimestamp()))
+                .bucket(this.bucket)
+                .timestamp(Instant.ofEpochMilli(timestamp))
                 .build();
     }
 }

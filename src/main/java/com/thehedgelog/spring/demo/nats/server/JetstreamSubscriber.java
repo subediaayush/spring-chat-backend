@@ -65,10 +65,8 @@ public class JetstreamSubscriber implements ApplicationListener<ApplicationStart
                 Object serde;
                 try {
                     serde = context.getBean(accept.serde().getSimpleName());
-                    log.info("Obtained mapper bean");
                 } catch (NoSuchBeanDefinitionException e) {
                     serde = accept.serde().getDeclaredConstructor().newInstance();
-                    log.info("Obtained mapper from constructor");
                 }
 
                 createJetStream(stream, subject);
